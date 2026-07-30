@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP Commerce | Dashboard</title>
+  <script>
+    document.documentElement.dataset.theme =
+      localStorage.getItem("erpTheme_v2") ||
+      (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  </script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body data-page="dashboard">
+  <div class="app-shell">
+    
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">EC</div>
+    <div><strong>ERP Commerce</strong><span>Gestão integrada</span></div>
+  </div>
+  <nav class="nav" id="navMain">
+    <a href="dashboard.html" data-page="dashboard"><span class="nav-icon">▦</span>Dashboard</a>
+    <a href="produtos.html" data-page="produtos"><span class="nav-icon">□</span>Produtos</a>
+    <a href="pedidos.html" data-page="pedidos"><span class="nav-icon">≡</span>Pedidos</a>
+    <a href="clientes.html" data-page="clientes"><span class="nav-icon">◎</span>Clientes</a>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-button" data-open-help>❔ Central de aprendizagem</button>
+    <button class="sidebar-button" data-theme-toggle><span data-theme-icon>☾</span> <span data-theme-label>Modo escuro</span></button>
+  </div>
+</aside>
+<div class="mobile-sidebar-backdrop"></div>
+
+    <main class="main">
+      
+<header class="topbar">
+  <div class="topbar-title">
+    <button class="icon-button mobile-menu" data-mobile-menu aria-label="Abrir menu">☰</button>
+    <div><h1>Dashboard</h1><p>Visão geral do desempenho do e-commerce</p></div>
+  </div>
+  <div class="topbar-actions">
+    
+    <button class="icon-button" data-theme-toggle aria-label="Alternar tema"><span data-theme-icon>☾</span></button>
+    <button class="button button-secondary" data-open-help>❔ <span class="desktop-label">Ajuda</span></button>
+    <div class="avatar" title="Administrador">AD</div>
+  </div>
+</header>
+
+      <div class="content page-grid">
+        <section class="kpi-grid" id="kpiSection">
+          <article class="card kpi-card"><div class="kpi-icon">R$</div><div class="kpi-label">Faturamento do mês</div><div class="kpi-value">R$ 48.920</div><div class="kpi-change positive">↑ 12,4% no período</div></article>
+          <article class="card kpi-card"><div class="kpi-icon">≡</div><div class="kpi-label">Pedidos</div><div class="kpi-value">186</div><div class="kpi-change positive">↑ 8,1% neste mês</div></article>
+          <article class="card kpi-card"><div class="kpi-icon">↗</div><div class="kpi-label">Ticket médio</div><div class="kpi-value">R$ 263</div><div class="kpi-change positive">↑ 3,8% no período</div></article>
+          <article class="card kpi-card"><div class="kpi-icon">!</div><div class="kpi-label">Alertas de estoque</div><div class="kpi-value">2</div><div class="kpi-change negative">Ação recomendada</div></article>
+        </section>
+
+        <section class="chart-grid">
+          <article class="card" id="salesChartCard">
+            <div class="card-header"><h2>Faturamento dos últimos 7 dias</h2><span class="badge success">Atualizado</span></div>
+            <div class="card-body">
+              <div class="chart-container"><canvas id="salesChartCanvas" aria-label="Gráfico de faturamento"></canvas></div>
+              <p id="chartOfflineNote" style="display:none;color:var(--warning);font-size:12px">Chart.js indisponível: exibindo gráfico alternativo.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-header"><h2>Pedidos por status</h2></div>
+            <div class="card-body">
+              <div class="chart-container small"><canvas id="statusChartCanvas" aria-label="Gráfico de pedidos por status"></canvas></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="card">
+            <div class="card-header"><h2>Pedidos recentes</h2><a class="button button-secondary" href="pedidos.html">Ver todos</a></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Pedido</th><th>Cliente</th><th>Canal</th><th>Total</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>#1048</strong></td><td>Mariana Costa</td><td>Loja própria</td><td>R$ 349,90</td><td><span class="badge success">Pago</span></td></tr>
+                  <tr><td><strong>#1047</strong></td><td>Lucas Almeida</td><td>Marketplace</td><td>R$ 189,90</td><td><span class="badge processing">Processando</span></td></tr>
+                  <tr><td><strong>#1045</strong></td><td>Rafael Lima</td><td>Marketplace</td><td>R$ 79,90</td><td><span class="badge warning">Pendente</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card onboarding-card" id="onboardingCard">
+            <div class="card-header"><h2>Trilha de aprendizagem</h2><span>🎓</span></div>
+            <div class="card-body">
+              <small>Complete as tarefas e o teste para confirmar o domínio básico do módulo.</small>
+              <div class="progress"><span id="onboardingProgress"></span></div>
+              <small id="onboardingText">0 etapas concluídas</small>
+              <div class="checklist" id="onboardingChecklist"></div>
+              <div class="competency-badge" id="competencyBadge"><strong>✓ Usuário preparado</strong><br><small>As principais tarefas e o teste foram concluídos.</small></div>
+              <button class="button button-primary" data-open-help style="margin-top:14px">Continuar treinamento</button>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+  
+
+<div class="modal-backdrop" id="helpBackdrop" data-close-help></div>
+<section class="modal learning-modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+  <div class="modal-header">
+    <div>
+      <h3 id="helpTitle">Central de aprendizagem</h3>
+      <small id="helpProgressText">0 etapas concluídas</small>
+    </div>
+    <button class="icon-button" data-close-help aria-label="Fechar">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="help-tabs">
+      <button class="help-tab active" data-panel="lessonsPanel">Como usar</button>
+      <button class="help-tab" data-panel="quizPanel">Teste de domínio</button>
+    </div>
+
+    <div class="help-panel active" id="lessonsPanel">
+      <div class="learning-intro">
+        <strong>Aprendizagem baseada em prática</strong>
+        <p>O usuário precisa navegar pelas páginas, realizar ações reais e alcançar pelo menos 6 de 7 acertos no teste. Assim, a conclusão não depende apenas de clicar em “próximo” no tutorial.</p>
+      </div>
+
+      <div class="device-note">
+        <strong>Onde o progresso fica salvo?</strong>
+        <p>Ele é armazenado neste navegador. Em outro computador, navegador, perfil ou janela anônima, a trilha começa novamente porque o progresso não é sincronizado.</p>
+      </div>
+
+      <div class="guide-list">
+        <details class="guide-section" open>
+          <summary><span class="guide-number">1</span><span><strong>Dashboard</strong><small>Entender a situação geral da operação</small></span></summary>
+          <div class="guide-content">
+            <ol>
+              <li>Observe os quatro indicadores: faturamento, pedidos, ticket médio e alertas de estoque.</li>
+              <li>Use o gráfico de faturamento para comparar o desempenho entre os dias.</li>
+              <li>Consulte o gráfico de status para identificar pedidos que precisam de atenção.</li>
+              <li>Veja os pedidos recentes e acesse “Ver todos” quando precisar trabalhar na lista completa.</li>
+            </ol>
+            <p><strong>O usuário aprendeu quando:</strong> consegue explicar qual indicador ou gráfico deve consultar para cada decisão.</p>
+          </div>
+        </details>
+
+        <details class="guide-section">
+          <summary><span class="guide-number">2</span><span><strong>Produtos</strong><small>Cadastrar e controlar catálogo e estoque</small></span></summary>
+          <div class="guide-content">
+            <ol>
+              <li>Pesquise um produto pelo nome ou pelo SKU.</li>
+              <li>Use o filtro para separar itens ativos, com estoque baixo ou sem estoque.</li>
+              <li>Para cadastrar, clique em “Novo produto” e informe todos os campos obrigatórios.</li>
+              <li>O SKU deve ser único. O sistema impede o cadastro de códigos repetidos.</li>
+              <li>Use “Editar” para corrigir nome, categoria, preço, SKU ou quantidade.</li>
+              <li>Use “+10 estoque” para simular uma reposição e observe a atualização automática do status.</li>
+              <li>Exclua um item somente quando tiver certeza, pois a ação remove o registro da demonstração.</li>
+            </ol>
+            <p><strong>Regra de estoque:</strong> 0 unidade = sem estoque; de 1 a 10 = estoque baixo; acima de 10 = ativo.</p>
+          </div>
+        </details>
+
+        <details class="guide-section">
+          <summary><span class="guide-number">3</span><span><strong>Pedidos</strong><small>Localizar vendas e atualizar o fluxo</small></span></summary>
+          <div class="guide-content">
+            <ol>
+              <li>Digite o número do pedido ou o nome do cliente na pesquisa.</li>
+              <li>Combine a pesquisa com o filtro de status para reduzir a lista.</li>
+              <li>Confira cliente, canal, data e valor antes de alterar qualquer informação.</li>
+              <li>Atualize a etapa pelo seletor da última coluna.</li>
+              <li>Interprete as cores: verde para pago/enviado, amarelo para pendente, vermelho para cancelado e azul/cinza para processando.</li>
+            </ol>
+            <p><strong>Boa prática:</strong> antes de cancelar ou avançar um pedido, confirme o número e o cliente para evitar alterações no registro errado.</p>
+          </div>
+        </details>
+
+        <details class="guide-section">
+          <summary><span class="guide-number">4</span><span><strong>Clientes</strong><small>Consultar relacionamento e histórico</small></span></summary>
+          <div class="guide-content">
+            <ol>
+              <li>Pesquise pelo nome ou e-mail.</li>
+              <li>Verifique o segmento do cliente: Novo, Recorrente ou VIP.</li>
+              <li>Compare quantidade de pedidos e total comprado para entender o relacionamento.</li>
+              <li>Use os indicadores superiores para acompanhar clientes ativos, recompra, VIPs e novos clientes.</li>
+            </ol>
+            <p><strong>O usuário aprendeu quando:</strong> consegue localizar um cliente e explicar se ele é novo, recorrente ou de alto valor.</p>
+          </div>
+        </details>
+
+        <details class="guide-section">
+          <summary><span class="guide-number">5</span><span><strong>Tutorial, trilha e reinício</strong><small>Rever ou começar o treinamento novamente</small></span></summary>
+          <div class="guide-content">
+            <ol>
+              <li>Use “Rever tutorial desta página” para repetir apenas as explicações da página atual.</li>
+              <li>Use “Reiniciar trilha” para apagar apenas o progresso de aprendizagem.</li>
+              <li>Produtos, pedidos e tema são mantidos quando apenas a trilha é reiniciada.</li>
+              <li>Use “Restaurar dados de demonstração” somente para voltar todo o projeto ao estado original.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="guide-section">
+          <summary><span class="guide-number">6</span><span><strong>Acessibilidade com VLibras</strong><small>Traduzir textos do sistema para Libras</small></span></summary>
+          <div class="guide-content">
+            <ol>
+              <li>Localize o botão flutuante do VLibras na lateral direita da página.</li>
+              <li>Clique no botão para abrir o tradutor e carregar o avatar.</li>
+              <li>Selecione ou destaque um texto da página para solicitar sua tradução para Libras.</li>
+              <li>Use os controles do próprio VLibras para reproduzir, pausar ou fechar o tradutor.</li>
+              <li>O recurso precisa de conexão com a internet para carregar o serviço oficial.</li>
+            </ol>
+            <p><strong>Importante:</strong> o VLibras é um recurso complementar de acessibilidade e não substitui textos claros, boa organização visual e navegação por teclado.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <div class="learning-actions">
+        <button class="button button-primary" data-start-tour>Rever tutorial desta página</button>
+        <button class="button button-secondary" data-reset-training>Reiniciar trilha</button>
+        <button class="button button-secondary" data-reset-demo>Restaurar dados de demonstração</button>
+      </div>
+    </div>
+
+    <div class="help-panel" id="quizPanel">
+      <div class="quiz-intro">
+        <strong>Teste baseado em situações reais</strong>
+        <p>São 7 perguntas. É necessário acertar pelo menos 6. Além do teste, a trilha exige que o usuário realize ações práticas no sistema.</p>
+      </div>
+
+      <form id="quizForm">
+        <div class="quiz-question">
+          <p>1. Você precisa encontrar o pedido #1045 de Rafael Lima que está pendente. Qual é a forma mais segura?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q1" value="wrong"> Abrir Clientes e procurar apenas pelo total comprado.</label>
+            <label><input type="radio" name="q1" value="correct"> Pesquisar #1045 ou Rafael Lima em Pedidos e aplicar o filtro Pendente.</label>
+            <label><input type="radio" name="q1" value="wrong"> Alterar todos os pedidos para Processando e procurar depois.</label>
+            <label><input type="radio" name="q1" value="wrong"> Usar somente o gráfico do Dashboard.</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Um produto possui 8 unidades. Qual status o sistema deve apresentar?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q2" value="wrong"> Sem estoque.</label>
+            <label><input type="radio" name="q2" value="wrong"> Ativo, sem qualquer alerta.</label>
+            <label><input type="radio" name="q2" value="correct"> Estoque baixo.</label>
+            <label><input type="radio" name="q2" value="wrong"> Cancelado.</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Ao cadastrar um novo produto, o sistema informa que o SKU já existe. O que fazer?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q3" value="correct"> Conferir o catálogo e informar um SKU único.</label>
+            <label><input type="radio" name="q3" value="wrong"> Repetir o mesmo SKU e alterar apenas o preço.</label>
+            <label><input type="radio" name="q3" value="wrong"> Excluir qualquer produto sem verificar qual usa o código.</label>
+            <label><input type="radio" name="q3" value="wrong"> Mudar o status de um pedido.</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Um item está com 0 unidades e você usa “+10 estoque”. Qual será o resultado esperado?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="wrong"> Continuará sem estoque.</label>
+            <label><input type="radio" name="q4" value="correct"> Ficará com 10 unidades e status Estoque baixo.</label>
+            <label><input type="radio" name="q4" value="wrong"> Ficará com 10 unidades e status Cancelado.</label>
+            <label><input type="radio" name="q4" value="wrong"> O produto será excluído automaticamente.</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Antes de alterar um pedido de Pendente para Pago, o que deve ser conferido?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q5" value="wrong"> Apenas a cor do menu lateral.</label>
+            <label><input type="radio" name="q5" value="correct"> Número do pedido, cliente e registro correto antes da alteração.</label>
+            <label><input type="radio" name="q5" value="wrong"> Somente o modo claro ou escuro.</label>
+            <label><input type="radio" name="q5" value="wrong"> A quantidade de clientes VIP.</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>6. Você quer identificar um cliente recorrente e avaliar sua importância. Onde olhar?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q6" value="correct"> Em Clientes, observando segmento, pedidos e total comprado.</label>
+            <label><input type="radio" name="q6" value="wrong"> Apenas no botão Novo produto.</label>
+            <label><input type="radio" name="q6" value="wrong"> Somente no filtro Cancelado.</label>
+            <label><input type="radio" name="q6" value="wrong"> Na configuração do modo escuro.</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p>7. A trilha desapareceu porque foi concluída. Como refazer o treinamento sem apagar produtos e pedidos?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q7" value="wrong"> Abrir o sistema em janela anônima e excluir os arquivos.</label>
+            <label><input type="radio" name="q7" value="wrong"> Restaurar obrigatoriamente todos os dados.</label>
+            <label><input type="radio" name="q7" value="correct"> Abrir Ajuda e selecionar “Reiniciar trilha”.</label>
+            <label><input type="radio" name="q7" value="wrong"> Alterar um pedido para Cancelado.</label>
+          </div>
+        </div>
+      </form>
+      <button class="button button-primary" id="submitQuiz" style="margin-top:16px">Corrigir teste</button>
+      <p id="quizResult"></p>
+    </div>
+  </div>
+</section>
+<div class="toast-container"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
+  
+<script src="../js/data.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/tutorial.js"></script>
+
+  <script src="../js/charts.js"></script>
+
+  <!-- VLibras: tradução automática do conteúdo para Libras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget("https://vlibras.gov.br/app");
+  </script>
+
+</body>
+</html>
